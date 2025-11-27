@@ -87,7 +87,7 @@ void APickup::OnPickup_Implementation(AActor* Target)
 	if (!bPickuped)
 	{
 		// 먹기 처리
-		UE_LOG(LogTemp, Log, TEXT("OnPickup_Implementation 실행"));
+		// UE_LOG(LogTemp, Log, TEXT("OnPickup_Implementation 실행"));
 		bPickuped = true;
 		PickupOwner = Target;
 		PickupStartLocation = Mesh->GetRelativeLocation() + GetActorLocation();	// Mesh의 월드 위치
@@ -95,6 +95,11 @@ void APickup::OnPickup_Implementation(AActor* Target)
 		BaseRoot->SetSimulatePhysics(false);// 바닥으로 가라앉는것 방지
 		PickupTimeline->PlayFromStart();	// 타임라인 시작
 	}
+}
+
+void APickup::OnPickupComplete_Implementation()
+{
+	Destroy();	// 자기 자신 삭제
 }
 
 void APickup::AddImpulse(FVector& Velocity)
@@ -124,11 +129,6 @@ void APickup::OnTimelineUpdate(float Value)
 
 void APickup::OnTimelineFinished()
 {
-	// 자신을 먹은 대상에게 자기가 가지고 있는 무기를 알려줘야 함
-	if (PickupOwner.IsValid() && PickupOwner->Implements<UInventoryOwner>())
-	{
-		IInventoryOwner::Execute_AddItem(PickupOwner.Get(), PickupItem, PickupCount);
-	}
-	Destroy();	// 자기 자신 삭제
+	Execute_OnPickupComplete(this);	
 }
 

@@ -5,7 +5,7 @@
 #include "Weapon/WeaponActor.h"
 #include "Weapon/UsedWeapon.h"
 #include "Item/Pickup.h"
-#include "Item/Consumable.h"
+//#include "Item/Consumable.h"
 
 // Sets default values for this component's properties
 UWeaponManagerComponent::UWeaponManagerComponent()
@@ -58,7 +58,7 @@ TSubclassOf<AUsedWeapon> UWeaponManagerComponent::GetUsedWeaponClass(EWeaponCode
 	return dataAsset->UsedWaeponClass;
 }
 
-TSubclassOf<APickup> UWeaponManagerComponent::GetPickupWeaponClass(EWeaponCode InType) const
+TSubclassOf<APickupWeapon> UWeaponManagerComponent::GetPickupWeaponClass(EWeaponCode InType) const
 {
 	const UWeaponDataAsset* dataAsset = *WeaponDatabase.Find(InType);
 	return dataAsset->PickupWeaponClass;

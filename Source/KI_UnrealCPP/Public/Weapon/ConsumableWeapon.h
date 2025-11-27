@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Weapon/WeaponActor.h"
-#include "Item/Consumable.h"
+//#include "Item/Consumable.h"
 #include "ConsumableWeapon.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWeaponUseEnded);
@@ -37,7 +37,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	int32 RemainingUseCount = 10;
 
-	// 무기를 다 사용했을 때 실행되는 델리게이트(현재 사용 안함)
-	UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Category = "Weapon")
-	FOnConsume OnWeaponUseEnded;
+	//// 무기를 다 사용했을 때 실행되는 델리게이트(현재 사용 안함)
+	//UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Category = "Weapon")
+	//FOnConsume OnWeaponUseEnded;
 };
