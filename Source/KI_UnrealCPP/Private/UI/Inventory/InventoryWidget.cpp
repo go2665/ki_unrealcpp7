@@ -21,7 +21,7 @@ void UInventoryWidget::InitializeInventoryWidget(UInventoryComponent* InventoryC
 {
 	if (InventoryComponent && SlotGridPanel)
 	{
-		TargetInventory = InventoryComponent;
+		TargetInventory = InventoryComponent;	// 인벤토리 컴포넌트 저장
 		if (TargetInventory.IsValid())
 		{
 			UE_LOG(LogTemp, Log, TEXT("인벤토리 위젯 초기화"));
@@ -33,11 +33,12 @@ void UInventoryWidget::InitializeInventoryWidget(UInventoryComponent* InventoryC
 			}
 
 			int32 size = FMath::Min(SlotGridPanel->GetChildrenCount(), TargetInventory->GetInventorySize());
+			SlotWidgets.Empty(size);
 			for (int i = 0; i < size; i++)
 			{
 				FInvenSlot* slotData = TargetInventory->GetSlotData(i);
 				UInventorySlotWidget* slotWidget = Cast<UInventorySlotWidget>(SlotGridPanel->GetChildAt(i));
-				slotWidget->InitializeSlot(i, slotData);
+				slotWidget->InitializeSlot(i, slotData);// 인벤토리 컴포넌트에 저장되어있는 슬롯과 슬롯 위젯을 엮어주는 작업
 				SlotWidgets.Add(slotWidget);
 			}
 		}

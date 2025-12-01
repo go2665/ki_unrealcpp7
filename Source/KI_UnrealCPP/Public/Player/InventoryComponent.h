@@ -64,10 +64,6 @@ public:
 	// 인벤토리 컴포넌트에서 각종 함수가 실패했을 때 리턴하는 상수
 	static const int32 InventoryFail = -1;
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
 public:	
 	// 아이템을 추가하는 함수(리턴:못먹은 아이템의 수, InItemData: 추가되는 아이템의 종류, InCount: 추가되는 아이템의 갯수)
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
