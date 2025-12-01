@@ -16,5 +16,5 @@ void UInventoryWidget::NativeConstruct()
 
 void UInventoryWidget::OnCloseClicked()
 {
-	OnInventoryCloseRequested.Broadcast();
+	OnInventoryCloseRequested.Broadcast();	// 닫힘 버튼이 눌려졌음을 알리기만 함
 }
