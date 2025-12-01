@@ -18,7 +18,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory|Slot")
 	TObjectPtr<UItemDataAsset> ItemData = nullptr;		
 
-	// 헬퍼
+	// 헬퍼------------------------------------------------------------------------------------
 	// 이 슬롯이 비어있는지 확인하는 함수
 	bool IsEmpty() const { return ItemData == nullptr || Count < 1; }
 	// 이 슬롯이 가득차있는지 확인하는 함수
@@ -35,7 +35,7 @@ public:
 	void SetCount(int32 NewCount) {
 		if (ItemData && NewCount > 0)
 		{
-			Count = FMath::Clamp(NewCount, 0, ItemData->ItemMaxStackCount);
+			Count = FMath::Min(NewCount, ItemData->ItemMaxStackCount);	// NewCount는 0~ItemMaxStackCount 범위의 값
 		}
 		else
 		{
