@@ -5,6 +5,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubSystems.h"
 #include "InputMappingContext.h"
+#include "Player/InventoryComponent.h"
+#include "Player/ActionCharacter.h"
 
 void AActionPlayerController::BeginPlay()
 {
@@ -19,6 +21,31 @@ void AActionPlayerController::BeginPlay()
 
 	PlayerCameraManager->ViewPitchMax = VewPitchMax;
 	PlayerCameraManager->ViewPitchMin = VewPitchMin;
+}
+
+void AActionPlayerController::OnPossess(APawn* aPawn)
+{
+	Super::OnPossess(aPawn);
+
+	AActionCharacter* player = Cast<AActionCharacter>(aPawn);
+	if (player)
+	{
+		InventoryComponent = player->GetInventoryComponent();
+		if (InventoryWidget.IsValid())
+		{
+			InventoryWidget->InitializeInventoryWidget(InventoryComponent.Get());
+		}
+	}
+}
+
+void AActionPlayerController::OnUnPossess()
+{
+	if (InventoryWidget.IsValid())
+	{
+		InventoryWidget->ClearInventoryWidget();
+	}
+	InventoryComponent = nullptr;
+	Super::OnUnPossess();
 }
 
 void AActionPlayerController::SetupInputComponent()
@@ -105,10 +132,19 @@ void AActionPlayerController::CloseInventoryWidget()
 
 void AActionPlayerController::InitializeMainHudWidget(UMainHudWidget* InWidget)
 {
-	MainHudWidget = InWidget;
+	if (InWidget)
+	{
+		MainHudWidget = InWidget;
 
-	// MainHudWidget의 Inventory의 닫힘 델리게이트에 함수 연결
-	FScriptDelegate delegate;
-	delegate.BindUFunction(this, "CloseInventoryWidget");
-	MainHudWidget->AddToInventoryCloseDelegate(delegate);
+		// MainHudWidget의 Inventory의 닫힘 델리게이트에 함수 연결
+		FScriptDelegate delegate;
+		delegate.BindUFunction(this, "CloseInventoryWidget");
+		MainHudWidget->AddToInventoryCloseDelegate(delegate);
+
+		InventoryWidget = MainHudWidget->GetInventoryWidget();
+		if (InventoryWidget.IsValid())	// Possess보다 타이밍이 늦다.
+		{
+			InventoryWidget->InitializeInventoryWidget(InventoryComponent.Get());
+		}
+	}
 }
