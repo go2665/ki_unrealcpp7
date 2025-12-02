@@ -109,7 +109,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	int32 InventorySize = 10;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory|Money")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Inventory|Money")
 	int32 Money = 0;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory|Slot")
