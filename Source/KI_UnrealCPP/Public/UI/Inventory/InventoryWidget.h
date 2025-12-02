@@ -21,6 +21,10 @@ public:
 
 	void InitializeInventoryWidget(class UInventoryComponent* InventoryComponent);
 	void RefreshInventoryWidget();
+
+	UFUNCTION()
+	void RefreshSlotWidget(int32 InSlotIndex);
+
 	void ClearInventoryWidget();
 
 	UPROPERTY(BlueprintAssignable, Category = "UI|Inventory")
@@ -29,6 +33,11 @@ public:
 private:
 	UFUNCTION()
 	void OnCloseClicked();
+
+	UFUNCTION(BlueprintCallable, Category = "UI|Inventory")
+	inline bool IsValidIndex(int32 InSlotIndex) const {
+		return InSlotIndex < SlotWidgets.Num() && InSlotIndex >= 0;
+	};
 
 protected:
 	UPROPERTY(meta = (BindWidget))
