@@ -14,5 +14,9 @@ class KI_UNREALCPP_API UUsableItemDataAsset_StmPotion : public UUsableItemDataAs
 {
 	GENERATED_BODY()
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemData|StaminaPotion")
+	float RecoveryAmount = 20.0f;
+
+public:
 	virtual void UseItem_Implementation(AActor* InTarget) override;
 };

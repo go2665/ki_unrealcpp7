@@ -145,6 +145,7 @@ void AActionCharacter::AddWeapon_Implementation(EWeaponCode Code, int32 UseCount
 void AActionCharacter::AddMoney_Implementation(int32 Income)
 {
 	UE_LOG(LogTemp, Log, TEXT("돈 (%d) 골드를 획득했습니다."), Income);
+	Inventory;
 }
 
 void AActionCharacter::RemoveMoney_Implementation(int32 Expense)
@@ -165,6 +166,14 @@ void AActionCharacter::DamageHealth_Implementation(float InDamage)
 	if (Resource)
 	{
 		Resource->AddHealth(-InDamage);
+	}
+}
+
+void AActionCharacter::RecoveryStamina_Implementation(float InRecovery)
+{
+	if (Resource)
+	{
+		Resource->AddStamina(InRecovery);
 	}
 }
 

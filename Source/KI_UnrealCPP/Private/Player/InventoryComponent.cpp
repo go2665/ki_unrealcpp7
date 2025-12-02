@@ -14,6 +14,12 @@ UInventoryComponent::UInventoryComponent()
 	Slots.SetNum(InventorySize);	// 인벤토리 크기만큼 빈 슬롯 만들기	
 }
 
+void UInventoryComponent::AddMoney(int32 InIncome)
+{
+	Money += InIncome;
+	OnInventoryMoneyChanged.ExecuteIfBound(Money);
+}
+
 int32 UInventoryComponent::AddItem(UItemDataAsset* InItemData, int32 InCount)
 {	
 	int32 remainingCount = InCount;
