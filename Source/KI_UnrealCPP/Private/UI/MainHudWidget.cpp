@@ -25,7 +25,7 @@ void UMainHudWidget::NativeConstruct()
 	}
 
 	if (Inventory && Shop)
-	{
+	{		
 		FScriptDelegate sellDelegate;
 		sellDelegate.BindUFunction(Inventory, "CloseDetailInfo");
 		Shop->AddToItemSellDelegate(sellDelegate);
