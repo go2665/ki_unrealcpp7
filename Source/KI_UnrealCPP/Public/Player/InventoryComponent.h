@@ -135,7 +135,7 @@ protected:
 private:
 	// 같은 종류의 아이템이 있는 슬롯을 찾는 함수
 	// InItemData: 비교할 아이템의 종류, InStartIndex: 찾기 시작할 인덱스
-	int32 FindSlotWithItem(UItemDataAsset* InItemData, int32 InStartIndex = 0);
+	int32 FindSlotWithItem(const UItemDataAsset* InItemData, int32 InStartIndex = 0);
 
 	// 비어있는 슬롯을 찾는 함수
 	int32 FindEmptySlot();

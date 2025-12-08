@@ -126,7 +126,7 @@ FInvenSlot* UInventoryComponent::GetSlotData(int32 InSlotIndex)
 	return &Slots[InSlotIndex];
 }
 
-int32 UInventoryComponent::FindSlotWithItem(UItemDataAsset* InItemData, int32 InStartIndex)
+int32 UInventoryComponent::FindSlotWithItem(const UItemDataAsset* InItemData, int32 InStartIndex)
 {
 	int32 result = UInventoryComponent::InventoryFail;	// -1은 실패했음을 알리는 값
 	int32 size = Slots.Num();
