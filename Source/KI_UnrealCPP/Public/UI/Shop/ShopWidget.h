@@ -19,6 +19,9 @@ protected:
 
 public:
 	void AddToItemSellDelegate(const FScriptDelegate& Delegate);
+		
+	UFUNCTION()
+	void UpdateAllBuyButtonState(int32 _);
 
 protected:
 	void ResetShopItemListWidget();
