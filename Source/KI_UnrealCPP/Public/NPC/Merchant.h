@@ -23,6 +23,8 @@ protected:
 public:	
 	virtual void OnInteraction_Implementation() override;
 
+	inline UDataTable* GetItemList() const { return ItemList; }
+
 protected:
 	UFUNCTION()
 	void OnInteractionBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
@@ -48,4 +50,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "NPC|Data")
 	TObjectPtr<UDataTable> ItemList = nullptr;
 
+private:
+	
 };

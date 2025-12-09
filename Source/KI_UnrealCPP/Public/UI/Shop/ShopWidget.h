@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "ShopWidget.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnShopCloseRequested);
 /**
  * 
  */
@@ -20,13 +21,20 @@ protected:
 public:
 	void InitializeShop(UDataTable* ItemList);
 
-	void AddToItemSellDelegate(const FScriptDelegate& Delegate);
+	void AddToItemSellDelegate(const FScriptDelegate& Delegate);	
 		
 	UFUNCTION()
 	void UpdateAllBuyButtonState(int32 _);
 
 protected:
 	void ResetShopItemListWidget();
+
+private:
+	UFUNCTION()
+	void OnExitButtonClicked();
+
+public:
+	FOnShopCloseRequested OnShopCloseRequested;
 	
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Shop|Sell", meta = (BindWidget))

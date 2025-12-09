@@ -7,6 +7,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Player/Interactor.h"
+#include "Player/ActionPlayerController.h"
 
 // Sets default values
 AMerchant::AMerchant()
@@ -43,14 +44,18 @@ void AMerchant::OnInteraction_Implementation()
 {
 	// 상점 열기
 	UE_LOG(LogTemp, Log, TEXT("상점을 엽니다. (%s)"), *GetActorLabel());
+	UWorld* world = GetWorld();
+	if (AActionPlayerController* pc = world->GetFirstPlayerController<AActionPlayerController>())
+	{
+		pc->OpenShopWidget(this);
+	}
 }
 
 void AMerchant::OnInteractionBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	TextWidgetComponent->SetVisibility(true);
-
 	if (OtherActor->Implements<UInteractor>())
 	{
+		TextWidgetComponent->SetVisibility(true);
 		IInteractor::Execute_AddInteractionTarget(OtherActor, this);
 	}
 }
@@ -60,7 +65,6 @@ void AMerchant::OnInteractionEndOverlap(AActor* OverlappedActor, AActor* OtherAc
 	if (OtherActor->Implements<UInteractor>())
 	{
 		IInteractor::Execute_ClearInteractionTarget(OtherActor, this);
+		TextWidgetComponent->SetVisibility(false);
 	}
-
-	TextWidgetComponent->SetVisibility(false);
 }
