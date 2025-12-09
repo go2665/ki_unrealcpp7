@@ -74,7 +74,7 @@ void AActionPlayerController::OnInventoryOnOff()
 {
 	if (MainHudWidget.IsValid())
 	{
-		if (MainHudWidget->GetOpenState() == EOpenState::Open)
+		if (MainHudWidget->GetInventoryState() == EOpenState::Open)
 		{
 			CloseInventoryWidget();
 		}
@@ -120,7 +120,7 @@ void AActionPlayerController::UnFreezePlayer()
 
 void AActionPlayerController::OpenInventoryWidget()
 {
-	if (MainHudWidget.IsValid())
+	if (MainHudWidget.IsValid() && !MainHudWidget->IsInventoryOpen())
 	{
 		UE_LOG(LogTemp, Log, TEXT("OpenInventoryWidget"));
 		MainHudWidget->OpenInventory();
@@ -140,7 +140,7 @@ void AActionPlayerController::CloseInventoryWidget()
 
 void AActionPlayerController::OpenShopWidget(AMerchant* TargetMerchant)
 {
-	if (MainHudWidget.IsValid())
+	if (MainHudWidget.IsValid() && !MainHudWidget->IsShopOpen())
 	{
 		UE_LOG(LogTemp, Log, TEXT("OpenShopWidget"));
 		MainHudWidget->OpenInventory();
